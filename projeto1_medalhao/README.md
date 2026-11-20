@@ -12,7 +12,7 @@ Catálogo usado: `cert_prep` (se a Free Edition não deixar criar catálogo, tro
 | 4 | `01` **Lote modificado** → `02` cenário **C** | arquivo mesmo nome não é recarregado; `force = true` duplica | idempotência por arquivo; `force` |
 | 5 | `01` **Lote 3** (registros ruins) → `02` cenário **D** → `03` cenário **C** | `VALIDATE`, `_rescued_data`, linhas com tipo errado | `rescuedDataColumn`, `badRecordsPath`, `VALIDATE` |
 | 6 | `04_silver.sql` | dedup, tipagem, `MERGE INTO` | MERGE, window functions, CTAS × INSERT OVERWRITE |
-| 7 | `05_gold.sql` (em breve) | agregações, views × MVs | views, materialized views |
+| 7 | `05_gold.sql` | agregações, views × MVs | views, materialized views |
 | 8 | `pipeline/` (em breve) | streaming table × MV, expectations, `AUTO CDC INTO` SCD1/SCD2 | Lakeflow Declarative Pipelines |
 | 9 | 5 questões estilo prova | — | revisão |
 
