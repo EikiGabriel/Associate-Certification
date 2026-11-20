@@ -8,6 +8,8 @@ Prova: **02/12/2026** (português). Ambiente: **Databricks Free Edition** (serve
 | 2 — Orquestração + CI/CD | Lakeflow Jobs, Databricks Asset Bundles, Git folders | Produção / CI/CD |
 | 3 — Governança + troubleshooting | Unity Catalog (GRANT, ownership, lineage), Delta Sharing, Query Profile | Governança |
 
+Resumo para a prova: [resumo.md](resumo.md)
+
 ## Como usar
 1. No Databricks: Workspace → Git folder `Associate-Certification` → **Pull**.
 2. Siga o `README.md` de cada projeto, passo a passo.
