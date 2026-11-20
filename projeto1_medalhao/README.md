@@ -13,7 +13,7 @@ Catálogo usado: `cert_prep` (se a Free Edition não deixar criar catálogo, tro
 | 5 | `01` **Lote 3** (registros ruins) → `02` cenário **D** → `03` cenário **C** | `VALIDATE`, `_rescued_data`, linhas com tipo errado | `rescuedDataColumn`, `badRecordsPath`, `VALIDATE` |
 | 6 | `04_silver.sql` | dedup, tipagem, `MERGE INTO` | MERGE, window functions, CTAS × INSERT OVERWRITE |
 | 7 | `05_gold.sql` | agregações, views × MVs | views, materialized views |
-| 8 | `pipeline/` (em breve) | streaming table × MV, expectations, `AUTO CDC INTO` SCD1/SCD2 | Lakeflow Declarative Pipelines |
+| 8 | `pipeline/` | streaming table × MV, expectations, `AUTO CDC INTO` SCD1/SCD2 | Lakeflow Declarative Pipelines |
 | 9 | 5 questões estilo prova | — | revisão |
 
 Ao fim de cada passo, mande os resultados das células `👀 OBSERVE`.
