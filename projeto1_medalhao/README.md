@@ -11,7 +11,7 @@ Catálogo usado: `cert_prep` (se a Free Edition não deixar criar catálogo, tro
 | 3 | `01` **Lote 2** (coluna nova `canal`) → `02` cenário **B** → `03` cenário **B** | erro/ausência da coluna sem `mergeSchema`; stream que falha e volta | `mergeSchema` (COPY INTO) × `schemaEvolutionMode = addNewColumns` (Auto Loader) |
 | 4 | `01` **Lote modificado** → `02` cenário **C** | arquivo mesmo nome não é recarregado; `force = true` duplica | idempotência por arquivo; `force` |
 | 5 | `01` **Lote 3** (registros ruins) → `02` cenário **D** → `03` cenário **C** | `VALIDATE`, `_rescued_data`, linhas com tipo errado | `rescuedDataColumn`, `badRecordsPath`, `VALIDATE` |
-| 6 | `04_silver.sql` (em breve) | dedup, tipagem, `MERGE INTO` | MERGE, window functions, CTAS × INSERT OVERWRITE |
+| 6 | `04_silver.sql` | dedup, tipagem, `MERGE INTO` | MERGE, window functions, CTAS × INSERT OVERWRITE |
 | 7 | `05_gold.sql` (em breve) | agregações, views × MVs | views, materialized views |
 | 8 | `pipeline/` (em breve) | streaming table × MV, expectations, `AUTO CDC INTO` SCD1/SCD2 | Lakeflow Declarative Pipelines |
 | 9 | 5 questões estilo prova | — | revisão |
