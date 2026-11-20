@@ -135,13 +135,21 @@ FORMAT_OPTIONS ('header' = 'true', 'inferSchema' = 'true');
 
 -- COMMAND ----------
 
--- D2: carga com coluna de resgate (dados que não cabem no schema vão para _rescued_data em vez de sumir)
+-- D2: inferSchema no lote 3 infere data_venda/quantidade como STRING -> conflito com a tabela (date/int).
+-- Solução: ler tudo como string e tipar explicitamente com try_cast (valor inválido vira NULL).
 COPY INTO bronze.vendas_copy
-FROM '/Volumes/cert_prep/landing/raw/vendas'
+FROM (
+  SELECT try_cast(id_venda AS INT)              AS id_venda,
+         try_cast(data_venda AS DATE)           AS data_venda,
+         try_cast(id_cliente AS INT)            AS id_cliente,
+         id_produto,
+         try_cast(quantidade AS INT)            AS quantidade,
+         try_cast(preco_unitario AS DOUBLE)     AS preco_unitario
+  FROM '/Volumes/cert_prep/landing/raw/vendas'
+)
 FILEFORMAT = CSV
 PATTERN = 'vendas_lote3_*.csv'
-FORMAT_OPTIONS ('header' = 'true', 'inferSchema' = 'true', 'rescuedDataColumn' = '_rescued_data')
-COPY_OPTIONS ('mergeSchema' = 'true');
+FORMAT_OPTIONS ('header' = 'true');
 
 -- COMMAND ----------
 
