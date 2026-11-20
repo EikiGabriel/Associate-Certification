@@ -9,7 +9,8 @@ CREATE OR REFRESH STREAMING TABLE silver_vendas (
 )
 COMMENT 'Vendas válidas'
 AS SELECT id_venda, data_venda, id_cliente, id_produto, quantidade, preco_unitario, canal,
-          quantidade * preco_unitario AS valor_total
+          quantidade * preco_unitario AS valor_total,
+          _rescued_data          -- expectations só enxergam colunas do SELECT
 FROM STREAM(bronze_vendas);
 
 -- CDC de clientes: SCD tipo 1 (só o estado atual)
