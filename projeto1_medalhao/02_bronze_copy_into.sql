@@ -129,9 +129,9 @@ ORDER BY id_venda LIMIT 10;
 COPY INTO bronze.vendas_copy
 FROM '/Volumes/cert_prep/landing/raw/vendas'
 FILEFORMAT = CSV
+VALIDATE ALL                       -- a ordem importa: VALIDATE vem logo após FILEFORMAT
 PATTERN = 'vendas_lote3_*.csv'
-FORMAT_OPTIONS ('header' = 'true', 'inferSchema' = 'true')
-VALIDATE ALL;
+FORMAT_OPTIONS ('header' = 'true', 'inferSchema' = 'true');
 
 -- COMMAND ----------
 
