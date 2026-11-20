@@ -36,13 +36,14 @@ def carregar():
           .load(ORIGEM)
           .withColumn("arquivo_origem", F.col("_metadata.file_path"))
           .withColumn("ingerido_em", F.current_timestamp()))
+    antes = spark.table(TABELA).count() if spark.catalog.tableExists(TABELA) else 0
     q = (df.writeStream
          .option("checkpointLocation", CHK)
          .option("mergeSchema", "true")
          .trigger(availableNow=True)
          .toTable(TABELA))
     q.awaitTermination()
-    print(q.lastProgress["numInputRows"] if q.lastProgress else 0, "linhas nesta execução")
+    print(spark.table(TABELA).count() - antes, "linhas nesta execução")
 
 def resumo():
     return spark.sql(f"""
