@@ -14,6 +14,8 @@ Catálogo usado: `cert_prep` (se a Free Edition não deixar criar catálogo, tro
 | 6 | `04_silver.sql` | dedup, tipagem, `MERGE INTO` | MERGE, window functions, CTAS × INSERT OVERWRITE |
 | 7 | `05_gold.sql` | agregações, views × MVs | views, materialized views |
 | 8 | `pipeline/` | streaming table × MV, expectations, `AUTO CDC INTO` SCD1/SCD2 | Lakeflow Declarative Pipelines |
-| 9 | 5 questões estilo prova | — | revisão |
+| 9 | 5 questões estilo prova (4/5) | — | revisão |
+
+Resultados e métricas: [RESULTADOS.md](RESULTADOS.md)
 
 Ao fim de cada passo, mande os resultados das células `👀 OBSERVE`.
