@@ -8,7 +8,7 @@ FROM STREAM read_files(
   '/Volumes/cert_prep/landing/raw/vendas',
   format => 'csv',
   header => true,
-  schemaHints => 'id_venda BIGINT, preco_unitario DECIMAL(10,2)'
+  schemaHints => 'id_venda BIGINT, data_venda DATE, quantidade INT, preco_unitario DECIMAL(10,2)'
 );
 
 CREATE OR REFRESH STREAMING TABLE bronze_clientes_cdc
