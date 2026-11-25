@@ -202,7 +202,7 @@ RESTORE TABLE t TO VERSION AS OF 0;
 
 ---
 
-## 11. Lakeflow Declarative Pipelines (prévia: próximo passo)
+## 11. Lakeflow Declarative Pipelines (= Delta Live Tables / DLT)
 
 | Conceito | Resumo |
 |---|---|
@@ -217,3 +217,14 @@ RESTORE TABLE t TO VERSION AS OF 0;
 | SCD2 | histórico com `__START_AT` e `__END_AT`; DELETE **fecha** a versão |
 | DAG | inferido pelas referências entre tabelas; você não declara a ordem |
 | Full refresh | apaga o estado e reprocessa tudo |
+
+**Validado na prática (Passo 8)**
+- Expectations só enxergam **colunas do SELECT** do dataset (erro `UNRESOLVED_COLUMN` se a coluna testada não estiver na saída).
+- Aba **Data quality**: `DROP` mostra registros descartados; sem `ON VIOLATION` aparece como **ALLOW** (linha mantida, violação contada).
+- `SEQUENCE BY` ordena pelo valor de sequência, **não pela ordem de chegada**: evento atrasado é encaixado na posição certa do histórico.
+- SCD2: versão atual = `__END_AT IS NULL`; `__START_AT`/`__END_AT` têm o **tipo da coluna de sequência** (aqui, struct).
+- DELETE: SCD1 **remove** a linha; SCD2 **fecha** a versão (preenche `__END_AT`).
+- Empate de sequência na mesma chave é ambíguo → desempatar com `SEQUENCE BY STRUCT(col1, col2)`.
+- Sintaxe antiga ainda em questões: `APPLY CHANGES INTO` (= `AUTO CDC INTO`), `LIVE.tabela`, `CREATE LIVE TABLE` / `CREATE STREAMING LIVE TABLE`.
+- Pasta de código-fonte do pipeline: todo `.sql`/`.py` dentro (inclusive subpastas) entra no pipeline; a ordem dos arquivos não importa, o **DAG vem das referências**.
+- Schema inferido na 1ª execução depende dos arquivos presentes; fixe tipos críticos com `schemaHints`.
